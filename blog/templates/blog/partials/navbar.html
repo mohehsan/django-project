@@ -1,0 +1,40 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm p-3 mb-5 bg-body rounded fixed-top">
+    <div class="container">
+        <a href="#" class="navbar-brand">AMIGO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-tags="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toogle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item fixed-position">
+                    <input type="search" class="form-control me-2 rounded-pill search-field" name="search" placeholder="Search" aria-label="Search">
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-bs-toggle="dropdown" role="button" aria-expanded="true">
+                        <img class="profile-img-nav rounded-circle"  src="{{ user.profile_pic.url }}" alt="" srcset="">
+                    </a>
+                    <ul class="nav-item dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'show_profile' user.id %}">See Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item fixed-position">
+                    <a class="nav-link btn-outline-secondary rounded-pill" href="{% url 'add_posts' %}">Upload</a>
+                </li>
+                {% else %}
+                <li class="nav-item fixed-position">
+                    <a class="nav-link btn-login rounded-pill" href="{% url 'account_login' %}">Login</a>
+                </li>
+                <li class="nav-item fixed-position">
+                    <a href="{% url 'account_signup' %}" class="nav-link btn-signup rounded-pill">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

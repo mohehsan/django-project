@@ -1,0 +1,156 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
+
+{% if user.is_authenticated %}
+<div class="container d-flex justify-content-center" style="margin-top: 10px" ;>
+    <div class="card">
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button type="submit" class="btn-sm btn-info text-white">Submit</button>
+                <a href="{% url 'add_category' %}" class="btn btn-sm btn-danger">Add Category</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% for post in posts %}
+<div class="container d-flex justify-content-center" style="margin-top: 10px;">
+    <div class="card" style="background-color: white;">
+        <div class="card-header" style="background-color: white;">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex">
+                            <img src="{{ post.users.profile_pic.url }}" alt="" srcset=""
+                                 class="rounded-circle img-thumbnail img-post">
+                            <div class="container-fluid">
+                                <p class="fs-5">{{ post.users.name }}</p>
+                                <p>Published on : {{ post.upload }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="divider">
+            </div>
+            <div class="card-body">
+                <h5 class="card-text lead"></h5>
+                <p>jdfjdshfks</p>
+                <img src="{{ post.memes_photo.url }}" alt="" srcset="" class="card-img-bottom">
+                <hr class="divider">
+                <div class="container">
+                    <div class="row">
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <button class="btn btn-outline-dark">
+                                    <span class="button__icons">
+                                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                                    </span>
+                                    <span>130</span>
+                                </button>
+                                <button class="btn btn-outline-dark">
+                                    <span class="button__icons">
+                                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                                    </span>
+                                    <span>130</span>
+                                </button>
+                                <button onclick="displayComment({{ post.id }})" class="btn btn-outline-dark">
+                                    <span class="button__icons">
+                                        <ion-icon name="chatbox-outline"></ion-icon>
+                                    </span>
+                                    <span>130</span>
+                                </button>
+                                <button class="btn btn-outline-dark">
+                                    <span class="button__icons">
+                                        <ion-icon name="share-social-outline"></ion-icon>
+                                    </span>
+                                    <span>130</span>
+                                </button>
+                            </li>
+                        </ul>
+                        <!-- comment section -->
+                        {% if user.is_authenticated %}
+                        <div style="display: none;" class="container" id="{{ post.id }}">
+                            <div class="d-flex flex-row">
+                                <div class="col-2 col-sm-2 col-md-1">
+                                    <div class="d-flex">
+                                        <div class="justify-content-center">
+                                            <img src="{{ request.user.profile_pic.url }}" alt="" srcset=""
+                                                 class="rounded-circle img-reply">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2">
+                                    <div class="container">
+                                        <div class="input-group mb-3">
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                {{ comment_form.text_comment | as_crispy_field}}
+                                                <input type="hidden" name="photo_id" value="{{ post.id }}">
+                                                <button type="submit" class="btn btn-sm btn-info">Add Comment</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end comment section -->
+
+                        <!-- reply section -->
+                        <div class="d-flex flex-row">
+                            <div class="col-2 col-sm-2 col-md-1">
+                                <div class="d-flex">
+                                    <div class="justify-content-center align-self-center">
+                                        <img src="{{ post.users.profile_pic.url }}" alt="" srcset=""
+                                             class="rounded-circle img-reply">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="reply-box p-2">
+                                <div class="row">
+                                    <p class="mb-1">{{ post.users.name }}</p>
+                                </div>
+                                <div class="row">
+                                    <p>{{ post.comment }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <ul class="replies-ul">
+                                    <li class="reply-btn">
+                                        <button class="btn">reply</button>
+                                        <button class="btn">share</button>
+                                    </li>
+                                </ul>
+                                <!-- reply form -->
+                                <div class="row" id="reply-form">
+                                    <div class="col d-flex">
+                                        <img src="" alt="" srcset="">
+                                        <div class="input-group mb-3 ms-2">
+                                            <input type="text" class="form-control" placeholder="Write Reply">
+                                            <button class="btn btn-outline-secondary">
+                                                <span><ion-icon name="image-outline"></ion-icon></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- end reply form -->
+                            </div>
+                        </div>
+                        <!-- end reply section -->
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}

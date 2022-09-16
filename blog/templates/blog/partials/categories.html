@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Category Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for category in categories %}
+    <tr>
+      <td>{{ category.name }}</td>
+      <td>
+        <a href="{% url 'edit_category' category.id %}" class="btn btn-info">Edit Category</a>
+        <a href="{% url 'delete_category' category.id %}" class="btn btn-danger">Delete Category</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

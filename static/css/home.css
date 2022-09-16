@@ -1,0 +1,126 @@
+html body {
+    background-color: #F9F9F9;
+}
+
+.fixed-position {
+    margin-right: 20px;
+    margin-top: 5px
+}
+
+.search-field {
+    position: relative;
+    width: 300px;
+    height: 40px;
+    padding: 6px;
+    margin-top: 3px;
+    background-color: #F0F8FF;
+}
+
+.profile-img-nav {
+    height: 40px;
+    width: 40px;
+    margin-top: -2px;
+}
+
+.nav-link.btn-outline-secondary {
+    margin-top: 0.5px;
+    font-family: Poppins;
+}
+
+.btn-login {
+    background-color: #5fde40;
+    padding: 6px;
+    width: 135px;
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    fond-weight: bold;
+    font-size:20px;
+    border-radius: 30px;
+    margin-top: 1px;
+}
+
+.btn-signup {
+    background-color: #e5e5e5;
+    padding: 6px;
+    width: 135px;
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    fond-weight: bold;
+    font-size:20px;
+    border-radius: 30px;
+    color: #644f4f;
+    margin-top: 1px;
+}
+
+/* slider */
+.container-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    height: 20vh;
+    position: relative;
+}
+
+.horizontal-scroll {
+    width: 800px;
+    height: 120px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    overflow: hidden;
+}
+
+.storys-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    transition: 0.5s all ease-out;
+    margin-top: 7px;
+}
+
+.story.circle {
+    background-color: linear-gradient(rgb(231, 0, 231), rgb(255, 115, 0));
+    width: 100px;
+    height: 100px;
+    margin: 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+}
+
+.story-text.p {
+    align-text: center;
+}
+
+.story-circle img {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    border-radius:50%;
+    border: 2px solid #fff;
+}
+
+.horizontal-scroll .btn-sroll {
+    background-color: #000000;
+    box-shadow: 0 0 10px #999;
+    color: #999;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 5px;
+    z-index: 999;
+    cursor: pointer;
+    transition: 1s;
+    position: relative;
+}

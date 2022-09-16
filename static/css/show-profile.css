@@ -1,0 +1,11 @@
+.header-img img {
+    width: 80px;
+    height: 80px;
+}
+
+.btn-edit {
+    /* border-radius: 2rem; */
+    background-color: #5FDE40;
+    color: white;
+    font-size: 0.75rem;
+}

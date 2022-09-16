@@ -1,0 +1,40 @@
+/* slider */
+.card {
+  width: 50rem;
+}
+/* end slider */
+
+
+/* post image */
+.img-post {
+  width: 75px;
+  height: 75px;
+  margin: 0px 0px;
+}
+
+/* end post image */
+
+/* reply button css */
+.img-reply {
+  width: 40px;
+  height: 40px;
+  margin: 0px 0px;
+}
+
+.reply-box {
+  border-radius: 20px;
+  background-color: #f0f2f5;
+}
+
+.replies-ul {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+}
+
+.reply-btn {
+  margin-right: 20px;
+}
+
+/* end reply  */
+

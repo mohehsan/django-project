@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+{% include 'blog/partials/navbar.html' %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<div class="container justify-content-center">
+    <div class="card bg-white">
+        <div class="align-self-center card-header justify-content-center bg-white">
+            <h3>Login</h3>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <form action="{% url 'account_login' %}" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-login-col">Login</button>
+                        <br>
+                        {% include 'socialaccount/snippets/provider_list.html' %}
+                    </div>
+                    <p style="text-align: center;"><a href="{% url 'account_reset_password' %}">{% trans 'Forgot Password' %}</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

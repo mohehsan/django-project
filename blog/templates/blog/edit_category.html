@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Edit Category
+{% endblock title %}
+
+
+{% block contents %}
+    <div class="card">
+        <div class="card-header">
+            <h5>Edit Category</h5>
+        </div>
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ category_form | crispy }}
+                <button type="submit" class="btn btn-info">Edit Category</button>
+            </form>
+        </div>
+    </div>
+{% endblock contents %}

@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    homepage
+{% endblock title %}
+
+
+{% block contents %}
+{% include 'blog/partials/navbar.html' %}
+{% include 'blog/partials/slider.html' %}
+{% include 'blog/partials/posts.html' %}
+{% endblock contents %}
