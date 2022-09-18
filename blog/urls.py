@@ -2,7 +2,6 @@ from django.urls import path
 
 from . import views
 
-from blog.views import homepage
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),

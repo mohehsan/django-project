@@ -1,0 +1,38 @@
+version: "3.10"
+
+services:
+  db:
+    container_name: "django-ecommerce-db"
+    image: postgres:13
+    env_file:
+      - ./.env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+    - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - django-ecommerce
+  web:
+    container_name: "django-ecommerce-web"
+    build: ..
+    working_dir: /app/backend
+    command: python manage.py runserver --settings=core.settings.docker ${APP_IP}:${APP_PORT}
+    volumes:
+      - .:/app
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    networks:
+      - django-ptf
+networks:
+    django-ecommerce:
+        driver: bridge
+volumes:
+  data:

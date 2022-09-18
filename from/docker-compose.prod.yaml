@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: "django-ptf-prod-db"
+    restart: on-failure
+    image: postgres:13
+    env_file:
+      - .env
+    ports:
+      - 5434:${DB_PORT}
+    volumes:
+    - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - django-ecommerce-v2
+  web:
+    container_name: "django-ecommerce-web"
+    restart: always
+    build:
+      context: ..
+      dockerfile: Dockerfile.prod
+    working_dir: /app/backend
+    command: gunicorn core.wsgi.production:application --bind ${APP_IP}:${APP_PORT}
+    volumes:
+      - .:/app
+      - static_volume:/app/backend/staticfiles
+      - media_volume:/app/backend/media
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    expose:
+      - ${APP_PORT}
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - django-ecommerce-v2
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/app/backend/staticfiles
+      - media_volume:/app/backend/media
+    container_name: ecomercee-nginx
+    env_file:
+      - .env
+    ports:
+      - 1338:80
+    depends_on:
+      - web
+    networks:
+      - django-ecommerce-v2
+networks:
+    django-ecommerce-v2:
+        driver: bridge
+volumes:
+  data:
+  static_volume:
+  media_volume:
